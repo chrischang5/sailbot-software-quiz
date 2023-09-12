@@ -19,14 +19,13 @@ def bound_to_180(angle):
     if LOWER_BOUND <= angle and angle < UPPER_BOUND:
         return angle
 
-    print(angle)
     # remove any "winding" first: where the angle spans the circle multiple times.
     angle_without_winding = angle % FULL_ANGLE
     print(angle_without_winding)
 
     # Cases: Angle is over upper bound or angle is under lower bound
 
-    if angle_without_winding > UPPER_BOUND:
+    if angle_without_winding >= UPPER_BOUND:
         # We wandered into the 0 to -180 region
         return LOWER_BOUND + (angle_without_winding % UPPER_BOUND)
     elif angle_without_winding < LOWER_BOUND:
