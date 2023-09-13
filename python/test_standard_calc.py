@@ -202,3 +202,7 @@ def test_between_reflex_angle_pass():
 
 def test_between_reflex_angle_fail():
     assert ~is_angle_between(0, 55, 270)
+
+
+def test_between_all_same():
+    assert is_angle_between(93, 93, 93)
