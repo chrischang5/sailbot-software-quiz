@@ -61,6 +61,8 @@ def is_angle_between(first_angle, middle_angle, second_angle):
     """
 
     def non_reflex_angle(angle1, angle2):
+        # print(min(COMPLETE_ANGLE - abs(angle1 - angle2), abs(
+        #     angle1 - angle2)))
         return min(COMPLETE_ANGLE - abs(angle1 - angle2), abs(
             angle1 - angle2))
 
