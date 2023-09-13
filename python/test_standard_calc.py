@@ -60,13 +60,40 @@ def test_bound_180_not_exclusive_winded():
 def test_bound_negative_180_inclusive_winded():
     assert bound_to_180(360 + -180) == -180
 
+def test_bound_negative_almost_180():
+    assert bound_to_180(-179.9) == -179.9
 
-def test_bound_360_CW():
+def test_bound_negative_just_over_180():
+    assert bound_to_180(-180.1) == 179.9
+
+def test_bound_positive_almost_180():
+    assert bound_to_180(179.9) == 179.9
+
+def test_bound_positive_just_over_180():
+    assert bound_to_180(180.1) == -179.9
+
+def test_bound_pos_360():
     assert bound_to_180(360) == 0
 
 
-def test_bound_360_CCW():
+def test_bound_negative_360():
     assert bound_to_180(-360) == 0
+
+
+def test_bound_negative_almost_360():
+    assert bound_to_180(-359) == 1
+
+
+def test_bound_positive_almost_360():
+    assert bound_to_180(359) == -1
+
+
+def test_bound_positive_just_more_than_360():
+    assert bound_to_180(361) == 1
+
+
+def test_bound_negative_just_more_than_360():
+    assert bound_to_180(-361) == -1
 
 
 """ Tests for is_angle_between() """
@@ -82,3 +109,11 @@ def test_between_basic2():
 
 def test_between_basic3():
     assert is_angle_between(45, 90, 270)
+
+
+def test_between_basic4():
+    assert ~is_angle_between(91, 90, 270)
+
+
+def test_between_basic5():
+    assert is_angle_between(90, 90, 90)

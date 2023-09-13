@@ -11,29 +11,25 @@ def bound_to_180(angle):
     Returns:
         float: The bounded angle in degrees.
     """
-
-    LOWER_BOUND = -180
-    UPPER_BOUND = 180
     FULL_ANGLE = 360
+    # First, remove any "winding": where the angle spans the circle multiple times.
+    
+    angle_without_winding = angle % FULL_ANGLE 
 
-    if LOWER_BOUND <= angle and angle < UPPER_BOUND:
-        return angle
+    # Limit angle to [0, 360) range
+    # For non-winded negative in the range [-359, 0)], we allow it to wind one time to put it within the range of [0, 360)
+    if angle_without_winding < 0:
+        angle_without_winding = angle + FULL_ANGLE
 
-    # remove any "winding" first: where the angle spans the circle multiple times.
-    angle_without_winding = angle % FULL_ANGLE
-    print(angle_without_winding)
+    # Split range [0, 360) into two ranges [0, 180) and [180, 360):
 
-    # Cases: Angle is over upper bound or angle is under lower bound
-
-    if angle_without_winding >= UPPER_BOUND:
-        # We wandered into the 0 to -180 region
-        return LOWER_BOUND + (angle_without_winding % UPPER_BOUND)
-    elif angle_without_winding < LOWER_BOUND:
-        # we wandered into the 0 to 180 region
-        return UPPER_BOUND - (angle_without_winding % LOWER_BOUND)
-    else:
-        # otherwise
+    # Map angles [0, 180) to [0, 180)
+    if 0 <= angle_without_winding and angle_without_winding < 180:
         return angle_without_winding
+    
+    # Map angles [180, 360) to [-180. 0) 
+    if 180 <= angle_without_winding and angle_without_winding < FULL_ANGLE:
+        return angle_without_winding - FULL_ANGLE
 
 
 def is_angle_between(first_angle, middle_angle, second_angle):
@@ -51,4 +47,6 @@ def is_angle_between(first_angle, middle_angle, second_angle):
     Returns:
         bool: True when `middle_angle` is not in the reflex angle of `first_angle` and `second_angle`, false otherwise.
     """
+
+    
     return first_angle <= middle_angle and middle_angle <= second_angle
