@@ -69,7 +69,7 @@ def is_angle_between(first_angle, middle_angle, second_angle):
     normalized_middle_angle = normalize(middle_angle)
     normalized_second_angle = normalize(second_angle)
 
-    # For the middle angle to be "between" the first and second angles, 
+    # For the middle angle to be "between" the first and second angles,
     # the middle angle needs to split the non-reflex angle into two sections.
 
     # The sum of the two split sections should equal
